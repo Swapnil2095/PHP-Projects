@@ -16,41 +16,47 @@ div.panel{
     display:none;
 }
 
-.slideshowTweet{
-    vertical-align:middle;
-}
 
-.slideshowTweet div {
-    padding: 15px;
-    text-align: center;
-    vertical-align:middle;
-    height: 150px;
-    width:500px;
-    max-height: 150px;
-    max-width: 500px;
-    display:none;
-    border: 1px solid #09F;
-    background-color: #87CEFA;
-}
-
-.divTweetContainer div{
+#Slider {
     
-    padding: 15px;
+    padding: 10px;
+    text-decoration: underline;
     text-align: center;
     vertical-align:middle;
     height: 150px;
-    width:500px;
+    width:1000px;
     max-height: 150px;
-    max-width: 500px;
-    display:none;
+    max-width: 10000px;
+    
     border: 1px solid #09F;
-    background-color: #87CEFA;    
+    background-color: #87CEFA;  
+     /*overflow: hidden;*/
 }
+
+#Slider .tweetSlides{
+    height: 150px;
+    width:1000px;
+    margin: 0;
+    margin-top: 0;
+    padding:10px;
+    display:block;
+    
+}
+
+#Slider .tweetSlide {
+    float:left; 
+    list-style-type: none;
+    width: 1000px;
+    height: 150px;
+   
+}
+
 
 .container{
     width: 100%;
     height: 100%;
     margin:0 auto;
+    
 }
         
 .left_col{
@@ -63,4 +69,11 @@ div.panel{
 .right_col{
     float:right;
     width:79%;
+   
+}
+
+h3 {
+    color: blue;
+    text-align: right;
+    margin-right: 40px;
 }

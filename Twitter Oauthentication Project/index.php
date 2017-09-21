@@ -18,7 +18,7 @@ echo "<div class='container'>";
         echo "<h2>Twitter Timeline Challenge</h2>";
 	//Just a text
 	echo "<div class='left_col'>";
-	    echo "<a href='#' class='know'>Know More</a>";
+	    //echo "<a href='#' class='know'>Know More</a>";
             echo "<div class='panel'>";
 		echo "This is just an assignment done for <br> rtCamp Solutions Pvt. Ltd.";
 		
@@ -90,38 +90,31 @@ echo "<div class='container'>";
             //Include tweet page which contains tweet grabbing code
             echo "Tweet Showcase:";		
 		
-            echo "<div id='divTweetContainer' class='slideshowTweet'>";
+           // echo "<div id='divTweetContainer' class='slideshowTweet'>";
                 //$statuses = $connection->get("statuses/home_timeline", ["count" => 25, "exclude_replies" => true]);
 		$tweets = $connection->get('statuses/user_timeline', ['count' => 20, 'exclude_replies' => true, 'screen_name' => $screen_name, 'include_rts' => false]);
                 $totalTweets[] = $tweets;
                 
-                $start = 1;
-                foreach ($totalTweets as $tweet) {
-                    foreach ($tweet as $key) {
-			echo $start . ':' . $key->text . '<br>';
-			$start++;
-                    }
-                }
                 
-                /*
-                $page = 0;
-                for ($count = 200; $count <= 400; $count += 200) { 
-                    $max = count($totalTweets[$page]) - 1;
-                    $tweets = $connection->get('statuses/user_timeline', ['count' => 200, 'exclude_replies' => true, 'max_id' => $totalTweets[$page][$max]->id_str, 'screen_name' => $screen_name, 'include_rts' => false]);
-                    $totalTweets[] = $tweets;
-                    $page += 1;
-                }
-                // printing recent tweets on screen
+                $i = 0;
                 $start = 1;
-                foreach ($totalTweets as $page) {
-                    foreach ($page as $key) {
-			echo $start . ':' . $key->text . '<br>';
-			$start++;
-                    }
-                }    
-                */
-                 
-            echo "</div>";
+                
+                echo "<div id='Slider'>";
+                    echo "<ul class='tweetSlides'>";
+                        foreach ($totalTweets as $tweet) {
+                            foreach ($tweet as $key) {
+                        
+                                 echo "<li class='tweetSlide'>".$start . ':' . $key->text . '<br>' ; 
+                                 echo "</li>";
+                                 //echo $start . ':' . $key->text . '<br>';                                
+                        
+                                $start++;
+                            }
+                        }
+                      
+                    echo "</ul>";                     
+                echo "</div>";
+                
 			
 	    //Include follower page which contains followers grabbing code
 	    //include 'follower.php';
@@ -136,37 +129,24 @@ echo "</div>";	// Container div ends
 
 <!DOCTYPE HTML>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Welcome to rtChallenge | A Twitter Timeline Assignment </title>
- 
-    <link rel="stylesheet" type="text/css" href="style.css" >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Welcome to rtChallenge | A Twitter Timeline Assignment </title>
 
-	<!-- Include jQuery library -->
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" >
+
+        <!-- Include jQuery library -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
         <!-- Include Cycle plugin By Mike Alsup, Thanks malsup-->
-	<script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js"></script>
-	
-        <script type="text/javascript">
-		function remProp(){
-			<!-- Remove the display style property of inner divs-->
-			document.getElementById("divTweetContainer").getElementsByTagName("div").style.removeProperty("display"); 
-		}
-                
-		$(document).ready(function() {
-			$('.slideshowTweet').cycle({
-				fx: 'fade'
-			});
-		});
-                
-                
-	</script>
-        
-</head>
+        <script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js"></script>
 
-    <body onLoad="remProp()">
+       <script type="text/javascript" src="main.js"></script>
+
+    </head>
+
+    <body onload="Slider();">
     </body>
-    
+
 </html>
 
 
