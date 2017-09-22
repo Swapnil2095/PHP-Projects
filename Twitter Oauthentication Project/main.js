@@ -10,35 +10,35 @@
 function Slider() {
 
     //settings for slider
-    var height = 150;
+    var width = 1000;
     var animationSpeed = 1000;
-    var pause = 1000;
+    var pause = 4000;
     var currentSlide = 1;
+    var originalSetup = 0;
+    var lastSlide = 5;
 
     //cache DOM elements
     var $slider = $('#Slider');
     var $slideContainer = $slider.find('.tweetSlides');
-    var $slides = $slideContainer.find('.tweetSlide');
+    var $slides = $slideContainer.find('.Slide');
   
-    console.log(document.getElementsByClassName("tweetSlide").length);
+    //console.log(document.getElementsByClassName("tweetSlide").length);
     var interval;
-    
-   
-
+    var lastSlide  = $slides.length; /*5*/
+    originalSetup = lastSlide * width;
+ 
     function startSlider() {
         interval = setInterval(function () {
-            $slideContainer.animate({'margin-top': '-=' + height}, animationSpeed, function () {
-                if (++currentSlide === $slides.length) {
-                                                           
-                    currentSlide = 1;                    
-                    $slideContainer.css("margin-top", 0);
-                    $('#Slider.tweetSlides').css("margin-top", 0);
-                    //$slideContainer.css("margin-bottom", 0);
-                    //$slideContainer.css("top", 0);
-                    //$slideContainer.css("bottom", 0);
-                  
+            
+            $slideContainer.animate({'margin-left': '-=' + width +'px'}, animationSpeed, function () {
+                if (++currentSlide === lastSlide ) {
+                    console.log(currentSlide);                                       
+                    currentSlide = 1; 
+                    $('#Slider .tweetSlides').css('margin-left',  0 + 'px'); 
+                    
                 }
             });
+            
         }, pause);
     }
 
@@ -46,7 +46,7 @@ function Slider() {
         clearInterval(interval);
     }
 
-    //$slideContainer.on('mouseenter', pauseSlider).on('mouseleave', startSlider);
+    //$('#Slider .tweetSlides').on('mouseenter', pauseSlider).on('mouseleave', startSlider);
 
     startSlider();
 

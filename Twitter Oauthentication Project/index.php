@@ -104,7 +104,7 @@ echo "<div class='container'>";
                         foreach ($totalTweets as $tweet) {
                             foreach ($tweet as $key) {
                         
-                                 echo "<li class='tweetSlide'>".$start . ':' . $key->text . '<br>' ; 
+                                 echo "<li class='Slide'>".$start . ':' . $key->text ; 
                                  echo "</li>";
                                  //echo $start . ':' . $key->text . '<br>';                                
                         
@@ -119,10 +119,56 @@ echo "<div class='container'>";
 	    //Include follower page which contains followers grabbing code
 	    //include 'follower.php';
 	    //getFollo($username);
-	echo "</div>";	//Right col div ends
-        
-    }
-        
+            // Empty array that will be used to store followers.
+            echo "<br><br>";
+            echo "Followers List: Follower's Name ['Twitter-Handler']"."<br>";
+            
+            $profiles = array();
+            // Get the ids of all followers.
+            $ids = $connection->get('followers/ids', ['count' => 20,'screen_name' => $screen_name]);
+            
+            foreach($ids as $singleid) {
+              // Perform a lookup for each chunk of 100 ids.
+              $profile = $connection->get('users/lookup', array('user_id' => $singleid));
+              // Loop through each profile result.
+               
+              array_push($profiles,$profile); 
+                /*
+                echo '<pre>';
+                    print_r($profile);
+                echo '</pre>';*/
+   
+              }
+              
+            $profiles = array_filter($profiles); 
+            echo "<div id='Followers'>";
+                echo "<ul class='Followers'>";
+                
+                    foreach($profiles as $profile){
+                
+                        $profile = array_filter($profile); 
+                
+                        if(!empty($profile)){
+                            foreach($profile as $user){
+                                echo "<li class='follower'>".$user->name." [".$user->screen_name."] ";
+                                echo "</li>";
+                            }
+                        }                
+                    }  
+                echo "</ul>";            
+            echo "</div>";          
+            
+            //Follower's Search Box
+            echo "      Search Box for Follower"."<br>";
+            echo "<div id='SerachFollower'>";
+            
+            
+            
+            echo "</div>";   
+            
+            
+        echo "</div>";	//Right col div ends        
+    }        
 echo "</div>";	// Container div ends
         
 ?>
